@@ -1,9 +1,9 @@
 /**
  * @author Amit
- * @version 4.0
+ * @version 5.0
  * 
- * Use Case 4:
- * Payslip generate and download.
+ * Use Case 5:
+ * Dashboard displaying for employee
  */
 package com.main;
 import com.model.*;
@@ -41,8 +41,7 @@ public class EmployeePayroll {
                     else
                         LoginService.login(user);
                     break;
-                 
-                
+                      
                 case 3:
                     return;
 

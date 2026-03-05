@@ -7,6 +7,9 @@ import com.model.*;
 import com.util.PasswordUtil;
 
 import com.service.*;
+
+import java.util.List;
+import java.util.ArrayList;
 public class LoginService {
 
 
@@ -46,6 +49,7 @@ public class LoginService {
 
     private static void showDashboard(Employee emp){
     	Payslip payslip = null;
+    	List<Payslip> payslipList = new ArrayList<>();
 
         Scanner sc = new Scanner(System.in);
 
@@ -54,7 +58,8 @@ public class LoginService {
             System.out.println("\n======= DASHBOARD =======");
             System.out.println("1. Generate Payslip");
             System.out.println("2. Download Payslip");
-            System.out.println("3. Logout");
+            System.out.println("3. Show Dashboard");
+            System.out.println("4. Logout");
 
             System.out.print("Enter choice: ");
             int choice = sc.nextInt();
@@ -63,12 +68,17 @@ public class LoginService {
 
                 case 1:
                     payslip = PayslipService.generatePayslip(emp);
+                    payslipList.add(payslip);
                     break;
                 
                 case 2:
                     PayslipPrintDownload.execute(payslip);
                     break;
                 case 3:
+                	DashboardService dashboardService = new DashboardService();
+                    dashboardService.showDashboard("EMPLOYEE", payslipList);
+                    break;
+                case 4:
                     SessionManager.endSession();
                     System.out.println("Logged out!");
                     return;
