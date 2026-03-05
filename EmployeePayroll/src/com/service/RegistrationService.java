@@ -1,6 +1,11 @@
-package com.registration;
+package com.service;
 
 import java.util.Scanner;
+
+import com.model.Employee;
+import com.model.UserAccount;
+import com.util.FileService;
+import com.util.Validator;
 
 public class RegistrationService {
 
@@ -8,7 +13,7 @@ public class RegistrationService {
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("=== USE CASE 1: EMPLOYEE REGISTRATION ===");
+        System.out.println("=== EMPLOYEE REGISTRATION ===");
 
         System.out.print("Enter Employee ID (EMP-XXXX): ");
         String empId = sc.nextLine();
@@ -42,8 +47,11 @@ public class RegistrationService {
 
         System.out.print("Create Password: ");
         String password = sc.nextLine();
+        
+        System.out.print("Enter type: ");
+        String type = sc.nextLine();
 
-        UserAccount account = new UserAccount(username, password);
+        UserAccount account = new UserAccount(username, password, type);
 
         Employee emp = new Employee(empId, name, email, phone, account);
 

@@ -1,4 +1,4 @@
-package com.registration;
+package com.util;
 
 import java.util.regex.*;
 
