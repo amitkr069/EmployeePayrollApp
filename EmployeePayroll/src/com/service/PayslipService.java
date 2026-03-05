@@ -4,7 +4,7 @@ import java.util.Scanner;
 import com.model.*;
 public class PayslipService {
 
-    public static void generatePayslip(Employee emp) {
+    public static Payslip generatePayslip(Employee emp) {
 
         Scanner sc = new Scanner(System.in);
 
@@ -24,6 +24,8 @@ public class PayslipService {
 
         System.out.print("Enter Allowances: ");
         double allowances = sc.nextDouble();
+        
+        
 
         SalaryComponents salary = new SalaryComponents()
                 .setBasic(basic)
@@ -34,5 +36,6 @@ public class PayslipService {
         Payslip payslip = new Payslip(month, emp, salary);
 
         System.out.println(payslip);
+        return payslip;
     }
 }

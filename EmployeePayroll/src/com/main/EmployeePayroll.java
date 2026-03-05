@@ -1,14 +1,13 @@
 /**
  * @author Amit
- * @version 2.0
+ * @version 4.0
  * 
- * Use Case 2:
- * Implemented user login feature.
+ * Use Case 4:
+ * Payslip generate and download.
  */
 package com.main;
 import com.model.*;
-import com.service.LoginService;
-import com.service.RegistrationService;
+import com.service.*;
 
 import java.util.Scanner;
 public class EmployeePayroll {
@@ -17,6 +16,7 @@ public class EmployeePayroll {
         Scanner sc = new Scanner(System.in);
 
         Employee user = null;
+        Payslip generatedPayslip = null;
 
         while(true){
 
@@ -41,7 +41,8 @@ public class EmployeePayroll {
                     else
                         LoginService.login(user);
                     break;
-
+                 
+                
                 case 3:
                     return;
 

@@ -43,4 +43,5 @@ public class SalaryComponents {
                 .mapToDouble(Double::doubleValue)
                 .sum();
     }
+    
 }

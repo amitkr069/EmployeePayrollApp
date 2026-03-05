@@ -2,10 +2,11 @@ package com.service;
 
 import java.util.Scanner;
 
-import com.model.Employee;
-import com.model.UserAccount;
+
+import com.model.*;
 import com.util.PasswordUtil;
 
+import com.service.*;
 public class LoginService {
 
 
@@ -44,6 +45,7 @@ public class LoginService {
     }
 
     private static void showDashboard(Employee emp){
+    	Payslip payslip = null;
 
         Scanner sc = new Scanner(System.in);
 
@@ -51,7 +53,8 @@ public class LoginService {
 
             System.out.println("\n======= DASHBOARD =======");
             System.out.println("1. Generate Payslip");
-            System.out.println("2. Logout");
+            System.out.println("2. Download Payslip");
+            System.out.println("3. Logout");
 
             System.out.print("Enter choice: ");
             int choice = sc.nextInt();
@@ -59,10 +62,13 @@ public class LoginService {
             switch(choice){
 
                 case 1:
-                    PayslipService.generatePayslip(emp);
+                    payslip = PayslipService.generatePayslip(emp);
                     break;
-
+                
                 case 2:
+                    PayslipPrintDownload.execute(payslip);
+                    break;
+                case 3:
                     SessionManager.endSession();
                     System.out.println("Logged out!");
                     return;

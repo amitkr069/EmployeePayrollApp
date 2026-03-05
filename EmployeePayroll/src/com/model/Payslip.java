@@ -1,52 +1,82 @@
 package com.model;
 
-public class Payslip {
 
-    private String month;
+public class Payslip implements Cloneable {
+
     private Employee employee;
     private SalaryComponents salary;
-
+    private String month;
+    private double gross;
     private double pf;
     private double tax;
+    
     private double netPay;
 
     public Payslip(String month, Employee employee, SalaryComponents salary) {
-        this.month = month;
         this.employee = employee;
         this.salary = salary;
-
-        calculateDeductions();
+        this.month = month;
+        calculateSalary();
     }
 
-    private void calculateDeductions() {
+    public Employee getEmployee() {
+        return employee;
+    }
 
-        double gross = salary.calculateGross();
+    public String getMonth() {
+        return month;
+    }
 
-        pf = salary.getBasic() * 0.12;
-        tax = gross * 0.10;
+    public double getNetPay() {
+        return netPay;
+    }
+    
+    private void calculateSalary() {
 
+        gross = salary.calculateGross();
+
+        pf = salary.getBasic() * 0.12;   // 12% PF
+        tax = gross * 0.10;              // 10% Tax
+
+        
         netPay = gross - (pf + tax);
     }
 
     @Override
     public String toString() {
+        return "PAYSLIP\n" +
+                "Employee ID : " + employee.getEmpId() + "\n" +
+                "Employee Name : " + employee.getName() + "\n" +
+                "Month : " + month + "\n" +
+                "Net Pay : " + netPay;
+    }
 
-        return "\n=========== PAYSLIP ===========\n" +
-                "Month : " + month +
-                "\nEmployee ID : " + employee.getEmpId() +
-                "\nEmployee Name : " + employee.getName() +
+    // Deep Clone
+    @Override
+    public Payslip clone() {
+        try {
+            return (Payslip) super.clone();
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
+    }
 
-                "\n\n----- Earnings -----" +
-                "\nBasic Salary : " + salary.getBasic() +
-                "\nHRA : " + salary.getHra() +
-                "\nDA : " + salary.getDa() +
-                "\nAllowances : " + salary.getAllowances() +
+    // equals()
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Payslip)) return false;
 
-                "\n\n----- Deductions -----" +
-                "\nPF : " + pf +
-                "\nTax : " + tax +
+        Payslip p = (Payslip) obj;
 
-                "\n\nNet Pay : " + netPay +
-                "\n===============================";
+        return employee.getEmpId().equals(p.employee.getEmpId())
+                && month.equals(p.month)
+                && netPay == p.netPay;
+    }
+
+    // hashCode()
+    @Override
+    public int hashCode() {
+        return employee.getEmpId().hashCode() + month.hashCode();
     }
 }
