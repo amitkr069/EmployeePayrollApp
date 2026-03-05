@@ -33,7 +33,7 @@ public class LoginService {
 
             SessionManager.startSession(username);
 
-            showDashboard();
+            showDashboard(emp);
 
         }
         else{
@@ -43,10 +43,33 @@ public class LoginService {
         }
     }
 
-    private static void showDashboard(){
+    private static void showDashboard(Employee emp){
 
-        System.out.println("\n======= DASHBOARD =======");
-        System.out.println("Employee Dashboard");
-        System.out.println("View Payslip | Update Profile");
+        Scanner sc = new Scanner(System.in);
+
+        while(true){
+
+            System.out.println("\n======= DASHBOARD =======");
+            System.out.println("1. Generate Payslip");
+            System.out.println("2. Logout");
+
+            System.out.print("Enter choice: ");
+            int choice = sc.nextInt();
+
+            switch(choice){
+
+                case 1:
+                    PayslipService.generatePayslip(emp);
+                    break;
+
+                case 2:
+                    SessionManager.endSession();
+                    System.out.println("Logged out!");
+                    return;
+
+                default:
+                    System.out.println("Invalid choice");
+            }
+        }
     }
 }

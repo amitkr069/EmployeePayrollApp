@@ -37,7 +37,6 @@ public class Employee {
     public UserAccount getAccount() {
         return account;
     }
-    
    
     @Override
     public String toString() {
