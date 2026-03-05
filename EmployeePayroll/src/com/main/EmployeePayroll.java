@@ -1,9 +1,9 @@
 /**
  * @author Amit
- * @version 5.0
+ * @version 6.0
  * 
- * Use Case 5:
- * Dashboard displaying for employee
+ * Use Case 6:
+ * Validating inputs while registering and logging in
  */
 package com.main;
 import com.model.*;
